@@ -8,10 +8,13 @@ BUFFER_SIZE = 1024
 
 def main():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+
+        # use the same port
+        s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         s.bind((HOST, PORT))
         s.listen(1) # make socket listen
         while True:
-            conn, addr = s.accept()
+            conn, addr = s.accept() # acceot incoming connections
             full_data = b""
             with conn:
                 print('Connected by', addr)

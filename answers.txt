@@ -1,4 +1,9 @@
 q1:
   s = sk.socket(family, ...)
 q2:
+  server has to bind and listen to everything
+  client only needs to send, there is no need to bind to anything
+q3:
+  s.setsockopt(socket.SOL, socket.SO_REQUSEADDR, 1)
+q4:
   
