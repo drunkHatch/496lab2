@@ -1,0 +1,4 @@
+q1:
+  s = sk.socket(family, ...)
+q2:
+  
