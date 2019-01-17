@@ -1,5 +1,5 @@
-#!usr/bin/venv python3
-import socket as sk
+#!/usr/bin/env python3
+import socket
 
 HOST = "localhost"
 PORT = 8001
@@ -10,38 +10,36 @@ Host: www.google.com
 
 """
 
+
 def connect_socket(addr):
     (family, socketype, proto, cannoname, sockaddr) = addr
     try:
-        s = sk.socket(family,socketype,proto)
+        s = socket.socket(family,socketype, proto)
         s.connect(sockaddr)
-        #print("connected")
         s.sendall(payload.encode())
 
-        s.shutdown(socket.SHUT_WR) # no more writing
+        s.shutdown(socket.SHUT_WR)
 
         full_data = b""
         while True:
             data = s.recv(BUFFER_SIZE)
             if not data:
-                break
+               break
             full_data += data
+
         print(full_data)
 
-    except Exception as e:
-        print("connection error")
+    except:
+        print("DID NOT CONNECT")
         pass
     finally:
         s.close()
-def main():
-    #("HOLY SHIT")
 
-    addr_info = sk.getaddrinfo(HOST, PORT, proto=sk.SOL_TCP)
+
+def main():
+    addr_info = socket.getaddrinfo(HOST, PORT, proto=socket.SOL_TCP)
     addr = addr_info[0]
     connect_socket(addr)
-    #print(addr)
-    #print(addr_info)
-    #sock = sk.socket()
 
 if __name__ == "__main__":
     main()
