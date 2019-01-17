@@ -38,10 +38,9 @@ def main():
 
     addr_info = sk.getaddrinfo(HOST, PORT, proto=sk.SOL_TCP)
     addr = addr_info[0]
-    connect_socket(addr)
-    #print(addr)
-    #print(addr_info)
-    #sock = sk.socket()
+    #connect_socket(addr)
+    with Pool() as p:
+        p.map(connect_socket, [addr for _ in range(1, 50)])
 
 if __name__ == "__main__":
     main()
